@@ -1,14 +1,22 @@
-﻿namespace SeleniumWebDriverTest
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace SeleniumWebDriverTest
 {
-    internal class DriverManager
+    public class DriverManager
     {
-        public DriverManager()
+        private readonly IWebDriver driver;
+
+        public IWebDriver GetWebDriver()
         {
+            return driver;
         }
 
-        internal void SetUpDriver(ChromeConfig chromeConfig)
+        public DriverManager()
         {
-            throw new NotImplementedException();
-        }
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("http://automationpractice.com/");
+        }       
     }
 }

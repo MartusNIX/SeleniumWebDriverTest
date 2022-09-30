@@ -6,64 +6,57 @@ namespace SeleniumWebDriverTest
 {
     public class Tests
     {
-        protected IWebDriver driver;
+        protected DriverManager driverManager;
+
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("http://automationpractice.com/");
+            driverManager = new DriverManager();
         }
 
         [Test]
         public void GetPageTitle()
         {
-            driver.Navigate().GoToUrl("http://automationpractice.com/");
-            Console.WriteLine(driver.Title);
-            driver.Close();
+            Console.WriteLine(driverManager.GetWebDriver().Title);
         }
 
         [Test]
         public void GetListLinkText()
-        {                     
-            IList<IWebElement> linksList = driver.FindElements(By.CssSelector("#block_top_menu >ul > li > a"));
+        {
+            var linksList = driverManager.GetWebDriver().FindElements(By.CssSelector("#block_top_menu >ul > li > a"));
             foreach (IWebElement link in linksList)
             {
                 Console.WriteLine(link.Text);
             }
-            driver.Close();
         }
 
         [Test]
         public void GetNameAttribute()
         {
-            IWebElement element = driver.FindElement(By.Name("search_query"));
+            var element = driverManager.GetWebDriver().FindElement(By.Name("search_query"));
             Console.WriteLine(element.GetAttribute("name"));
-            driver.Close();
         }
 
         [Test]
         public void ClikOnTab()
         {
-            IWebElement tabButton = driver.FindElement(By.ClassName("blockbestsellers"));
+            var tabButton = driverManager.GetWebDriver().FindElement(By.ClassName("blockbestsellers"));
             tabButton.Click();
-            driver.Close();
         }
 
         [Test]
         public void InsertTextInSearchField()
         {
-            IWebElement inputText = driver.FindElement(By.Id("search_query_top"));
+            var inputText = driverManager.GetWebDriver().FindElement(By.Id("search_query_top"));
             inputText.SendKeys("Summer");
-            IWebElement pressSearchBtn = driver.FindElement(By.Name("submit_search"));
-            pressSearchBtn.Click();
-            driver.Close();
+            var pressSearchBtn = driverManager.GetWebDriver().FindElement(By.Name("submit_search"));
         }
         
         [TearDown]
         public void QuitDriver()
         {
-            driver.Quit();
+            driverManager.GetWebDriver().Close();
+            driverManager.GetWebDriver().Quit();
         }
     }
 }
