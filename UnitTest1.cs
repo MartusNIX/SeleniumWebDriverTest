@@ -39,6 +39,7 @@ namespace SeleniumWebDriverTest
         {
             IWebElement element = driver.FindElement(By.Name("search_query"));
             Console.WriteLine(element.GetAttribute("name"));
+            driver.Close();
         }
 
         [Test]
