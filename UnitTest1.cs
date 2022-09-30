@@ -17,14 +17,12 @@ namespace SeleniumWebDriverTest
 
         [Test]
         public void GetListLinkText()
-        {
-                                  
+        {                     
             IList<IWebElement> linkList = driver.FindElements(By.CssSelector("#block_top_menu >ul > li > a"));
             foreach (IWebElement link in linkList)
             {
-                System.Console.WriteLine(link.Text);
+                Console.WriteLine(link.Text);
             }
-
         }
     }
 }
